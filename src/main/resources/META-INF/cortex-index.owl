@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<!DOCTYPE rdf:RDF [
+   <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+   <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+   <!ENTITY cop  "http://www.esa.int/copernicus#">
+   <!ENTITY nc "http://www.unidata.ucar.edu/netcdf#">
+   <!ENTITY drb "http://www.gael.fr/drb#">
+   <!ENTITY img "http://www.gael.fr/drb/image#">
+]>
+
+<rdf:RDF xmlns:owl  = "&owl;"
+         xmlns:rdf  = "&rdf;"
+         xmlns:rdfs = "&rdfs;"
+         xmlns:drb  = "&drb;"
+         xmlns:nc   = "&nc;"
+         xmlns:img  = "&img;"
+         xmlns:cop  = "&cop;"
+         xmlns      = "&cop;">
+
+   <owl:Ontology rdf:about="&cop;">
+      <rdfs:label xml:lang="en">Copernicus Land/Marine Ontology</rdfs:label>
+   </owl:Ontology>
+
+   <!-- ==================================================================== -->
+   <!-- COPERNICUS Marine regexes provided by                                -->
+   <!-- Excel file V3productNOCHANGEinV4-PIT_v5-PP-FC.xlx                    -->
+   <!-- ==================================================================== -->
+   <!--
+       ([0-9]{8}_hr-metno-MODEL-topaz4-ARC-b[0-9]{8}-fv02.0\.nc) |
+       ([0-9]{8}_dm-metno-MODEL-topaz4-ARC-b[0-9]{8}-fv02.0\.nc) |
+       (metoffice_coupled_orca025_GL4_[A-Z]{3}_b[0-9]{8}_(dm|hi)[0-9]{8}\.nc) |
+       (metoffice_foam1_amm7_NWS_\D{4}_b\d{8}_dm\d{8}\.nc) |
+       (metoffice_foam1_amm7_NWS_\D{3}_b\d{8}_\D{2}\d{8}\.nc) |
+       (metoffice_foam1_amm7_NWS_TMB_\D{3}_b\d{8}_hi\d{8}\.nc) |
+       (metoffice_wave_amm7_NWS_WAV_b\d{8}_hi\d{8}\.nc) |
+       (OA_NRTOAGL01_20100115_fld_\D{4}\.nc) |
+       (OA_NRTOAGL01_20100115_fld_\D{4}\.nc) |
+       ([0-9]{14}-OSISAF-L3S_GHRSST-SSTsubskin-MERGED-EUR-adjusted-MYO-002x002_0024-v02-fv01\.nc) |
+       (\d{8}-IFR-L3C_GHRSST-SSTsubskin-ODYSSEA-GLOB_010_adjusted-v2.0-fv1.0\.nc) |
+       ([0-9]{4}_\D{3}-UKMO-L4_GHRSST-SSTfnd-OSTIAseason-GLOB-v02.0-fv02.0\.nc) |
+       ([0-9]{14}-UKMO-L4_GHRSST-SSTfnd-OSTIA\D{4}-GLOB-v02.0-fv02.\d{1}\.nc) |
+       ([0-9]{6}-UKMO-L4_GHRSST-SSTfnd-OSTIAmonthly-GLOB-v02.0-fv02.0\.nc) |
+       ([0-9]{8}-UKMO-L4LRens-GLOB-v01-fv02-GMPE.nc) |
+       (GLO-WIND_L3-OBS_METOP-(A|B)_ASCAT_(12|25)_(DES|ASC)_[0-9]{8}\.nc)
+    -->
+
+   <!-- ==================================================================== -->
+   <!-- COPERNICUS Product (Marine)                                          -->
+   <!-- ==================================================================== -->
+   <owl:Class rdf:about="&cop;productMarine">
+      <rdfs:label xml:lang="en">Copernicus Product (Marine)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Copernicus Product (Marine)
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&nc;netCDF"/>
+      <drb:signature rdf:parseType="Resource">
+         <!--
+         <drb:nameMatch>(.*-fv\d\d(\.\d){0,1}|metoffice_.*|CMEMS_v.*|OA_NRTOAGL\d\d_\d{8}_fld_\D{4})\.nc</drb:nameMatch>
+         -->
+         <drb:nameMatch>(?i)(.*-metno-MODEL-topaz4-ARC-b.*\.nc|metoffice_.*\.nc|OA_NRTOAGL01.*\.nc|.*-OSISAF-L3S.*\.nc|.*-IFR-L3C.*\.nc|.*-UKMO-L4.*\.nc|GLO-WIND_L3-OBS_METOP-.*)\.nc</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ==================================================================== -->
+   <!-- COPERNICUS Land regexes found on                                     -->
+   <!-- https://land.copernicus.vgt.vito.be/PDF/datapool/                    -->
+   <!-- and listed in document                                               -->
+   <!-- /nas/data/dev-reference/copernicus-land/products.docx                -->
+   <!-- ==================================================================== -->
+   <!--
+        FAPAR
+           BioPar_FAPAR300_V1_Global
+              c_gls_FAPAR300-RT2_201801100000_GLOBE_PROBAV_V1.0.1.nc
+           BioPar_FAPAR_V2_Global
+              c_gls_FAPAR-RT6_201801100000_GLOBE_PROBAV_V2.0.1.nc 
+           BioPar_FAPAR_V1_Tiles
+               g2_BIOPAR_FAPAR_201801030000_H12V3_PROBAV_V1.4.zip . . .
+               g2_BIOPAR_FAPAR_201801030000_H4V9_PROBAV_V1.4.zip . . .
+           BioPar_FAPAR_V1_CONTINENTS
+              g2_BIOPAR_FAPAR_201801030000_.*_PROBAV_V1.4.zip
+              e.g. g2_BIOPAR_FAPAR_201801030000_AFRI_PROBAV_V1.4.zip . . .
+                   g2_BIOPAR_FAPAR_201801030000_ASIA_PROBAV_V1.4.zip . . .
+           BioPar_FAPAR_V1_Global
+              c_gls_FAPAR_201801030000_GLOBE_PROBAV_V1.5.1.nc
+        FCOVER
+           BioPar_FCOVER300_V1_Global
+              c_gls_FCOVER300-RT2_201801100000_GLOBE_PROBAV_V1.0.1.nc
+           BioPar_FCOVER_V2_Global
+              c_gls_FCOVER-RT6_201801100000_GLOBE_PROBAV_V2.0.1.nc
+           BioPar_FCOVER_V1_Tiles
+              g2_BIOPAR_FCOVER_201801030000_H15V7_PROBAV_V1.4.zip . . .
+              g2_BIOPAR_FCOVER_201801030000_H8V11_PROBAV_V1.4.zip . . .
+           BioPar_FCOVER_V1_CONTINENTS
+              g2_BIOPAR_FCOVER_201801030000_.*_PROBAV_V1.4.zip
+              e.g. g2_BIOPAR_FCOVER_201801030000_ASIA_PROBAV_V1.4.zip . . .
+                   g2_BIOPAR_FCOVER_201801030000_NOAM_PROBAV_V1.4.zip . . .
+           BioPar_FCOVER_V1_Global
+              c_gls_FCOVER_201801030000_GLOBE_PROBAV_V1.5.1.nc
+        LAI
+           BioPar_LAI300_V1_Global
+              c_gls_LAI300-RT2_201801100000_GLOBE_PROBAV_V1.0.1.nc
+           BioPar_LAI_V2_Global
+              c_gls_LAI-RT6_201801100000_GLOBE_PROBAV_V2.0.1.nc
+           BioPar_LAI_V1_Tiles
+              g2_BIOPAR_LAI_201801030000_H14V14_PROBAV_V1.4.zip . . .
+              g2_BIOPAR_LAI_201801030000_H4V7_PROBAV_V1.4.zip . . .
+           BioPar_LAI_V1_CONTINENTS
+              g2_BIOPAR_LAI_201801030000_.*_PROBAV_V1.4.zip
+              e.g. g2_BIOPAR_LAI_201801030000_EURO_PROBAV_V1.4.zip . . .
+                   g2_BIOPAR_LAI_201801030000_AFRI_PROBAV_V1.4.zip . . .
+           BioPar_LAI_V1_Global
+              c_gls_LAI_201801030000_GLOBE_PROBAV_V1.5.1.nc
+        NDV
+           BioPar_NDVI300_V1_Global
+              c_gls_NDVI300_201801010000_GLOBE_PROBAV_V1.0.1.nc
+           BioPar_NDVI_V2_Global
+              c_gls_NDVI_201801010000_GLOBE_PROBAV_V2.2.1.nc
+           BioPar_NDVI_V2_Tiles
+              g2_BIOPAR_NDVI_201801010000_H10V9_PROBAV_V2.1.zip . . .
+              g2_BIOPAR_NDVI_201801010000_H4V11_PROBAV_V2.1.zip . . .
+           BioPar_NDVI_V2_CONTINENTS
+              g2_BIOPAR_NDVI_201801010000_.*_PROBAV_V2.1.zip
+              e.g. g2_BIOPAR_NDVI_201801010000_NOAM_PROBAV_V2.1.zip . . .
+                   g2_BIOPAR_NDVI_201801010000_OCEA_PROBAV_V2.1.zip . . .
+           BioPar_NDVI_V1_Tiles up to 31/05/2014
+              g2_BIOPAR_NDVI_201401030000_H10V5_VGT_V1.3.zip . . .
+              g2_BIOPAR_NDVI_201401030000_H1V7_VGT_V1.3.zip . . .
+           BioPar_NDVI_V1_CONTINENTS up to 31/05/2014
+              g2_BIOPAR_NDVI_201405030000_.*_VGT_V1.3.zip
+              e.g. g2 g2_BIOPAR_NDVI_201405030000_SOAM_VGT_V1.3.zip . . .
+                   g2 g2_BIOPAR_NDVI_201405030000_EURO_VGT_V1.3.zip . . .
+        VCI
+           BioPar_VCI_Tiles
+              g2_BIOPAR_VCI_201801010000_H11V12_PROBAV_V1.0.zip . . .
+              g2_BIOPAR_VCI_201801010000_H4V8_PROBAV_V1.0.zip . . .
+           BioPar_VCI_CONTINENTS
+              g2_BIOPAR_VCI_201801010000_.*_PROBAV_V1.0.zip
+              e.g. g2_BIOPAR_VCI_201801010000_OCEA_PROBAV_V1.0.zip
+                   g2_BIOPAR_VCI_201801010000_ASIA_PROBAV_V1.0.zip
+        VPI
+           BioPar_VPI_Tiles
+              g2_BIOPAR_VPI_201801010000_H0V10_PROBAV_V1.0.zip . . .
+              g2_BIOPAR_VPI_201801010000_H9V4_PROBAV_V1.0.zip . . .
+           BioPar_VPI_CONTINENTS
+              g2_BIOPAR_VPI_201801010000_.*_PROBAV_V1.0.zip
+              e.g. g2_BIOPAR_VPI_201801010000_EURO_PROBAV_V1.0.zip
+                   g2_BIOPAR_VPI_201801010000_AFRI_PROBAV_V1.0.zip
+        DMP
+           BioPar_DMP300_V1_Global
+              c_gls_DMP300-RT5_201712100000_GLOBE_PROBAV_V1.0.1.nc
+           BioPar_DMP_V2_Global
+              c_gls_DMP-RT6_201712100000_GLOBE_PROBAV_V2.0.1.nc
+           BioPar_DMP_Tiles
+              g2_BIOPAR_DMP_201712110000_H10V4_PROBAV_V1.0.zip . . .
+              g2_BIOPAR_DMP_201712110000_H8V11_PROBAV_V1.0.zip . . .
+           BioPar_DMP_CONTINENTS
+              g2_BIOPAR_DMP_201712110000_.*_PROBAV_V1.0.zip
+              e.g. g2_BIOPAR_DMP_201712110000_AFRI_PROBAV_V1.0.zip . . .
+                   g2_BIOPAR_DMP_201712110000_NOAM_PROBAV_V1.0.zip . . .
+           BioPar_GDMP300_V1_Global
+              c_gls_GDMP300-RT5_201712100000_GLOBE_PROBAV_V1.0.1.nc
+           BioPar_GDMP_V2_Global
+              c_gls_GDMP-RT6_201712100000_GLOBE_PROBAV_V2.0.1.nc
+        BA
+           BioPar_BA300_V1_Global
+              c_gls_BA300_201801100000_GLOBE_PROBAV_V1.0.1.nc
+           BioPar_BA_V1_Tiles
+              g2_BIOPAR_BA_201801100000_H10V8_PROBAV_V1.5.zip . . .
+              g2_BIOPAR_BA_201801100000_H4V7_PROBAV_V1.5.zip . . .
+           BioPar_BA_V1_CONTINENTS
+              g2_BIOPAR_BA_201801100000_.*_PROBAV_V1.5.zip
+              e.g. g2_BIOPAR_BA_201801100000_OCEA_PROBAV_V1.5.zip
+                   g2_BIOPAR_BA_201801100000_SOAM_PROBAV_V1.5.zip
+        LC
+           BioPar_LC100_LCCS_V1_CONTINENTS
+              c_gls_LC100-LCCS_201501010000_AFRI_PROBAV_1.0.1.nc
+           BioPar_LC100_COV_SHRUB_V1_CONTINENTS_GTIFF
+              c_gls_LC100-COV-SHRUB_201501010000_AFRI_PROBAV_1.0.1.zip
+
+   -->
+
+   <!-- ==================================================================== -->
+   <!-- COPERNICUS Product (Land)                                            -->
+   <!-- ==================================================================== -->
+
+   <owl:Class rdf:about="&cop;productLand">
+      <rdfs:label xml:lang="en">Copernicus Product (Land)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Copernicus Product (Land)
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)(c_gls_(FAPAR|FCOVER|LAI|NDVI|DMP|GDMP|BA300|LC100-LCCS|LC100-COV-SHRUB).*\.nc|g2_BIOPAR_(FAPAR|FCOVER|LAI|NDVI|VCI|VPI|DMP|BA).*)</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <owl:Class rdf:about="&cop;productLandNetCDF">
+      <rdfs:label xml:lang="en">Copernicus Product (Land) - NetCDF format</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Copernicus Product (Land) - NetCDF product
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&cop;productLand"/>
+      <rdfs:subClassOf rdf:resource="&nc;netCDF"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)c_gls_(FAPAR|FCOVER|LAI|NDVI|DMP|GDMP|BA300|LC100-LCCS|LC100-COV-SHRUB).*\.nc</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <owl:Class rdf:about="&cop;productLandZipped">
+      <rdfs:label xml:lang="en">Copernicus Product (Land) - Zipped format</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Copernicus Product (Land) - Zipped product
+      </rdfs:comment>
+      <!-- Should be
+      <rdfs:subClassOf rdf:resource="&cop;productLand"/>
+      but it does not work... -->
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:xqueryTest>
+            *[matches(name(), "g2_BIOPAR_(FAPAR|FCOVER|LAI|NDVI|VCI|VPI|DMP|BA).*")]
+         </drb:xqueryTest>
+      </drb:signature>
+   </owl:Class>
+
+</rdf:RDF>
