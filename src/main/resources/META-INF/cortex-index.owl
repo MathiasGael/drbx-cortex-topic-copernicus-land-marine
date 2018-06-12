@@ -59,7 +59,7 @@
          <!--
          <drb:nameMatch>(.*-fv\d\d(\.\d){0,1}|metoffice_.*|CMEMS_v.*|OA_NRTOAGL\d\d_\d{8}_fld_\D{4})\.nc</drb:nameMatch>
          -->
-         <drb:nameMatch>(?i)(.*metno-MODEL-topaz4-ARC-b.*|metoffice_.*|OA_NRTOAGL01.*|.*OSISAF-L3S.*|.*IFR-L3C.*|.*-UKMO-L4.*|GLO-WIND_L3-OBS_METOP.*)\.nc</drb:nameMatch>
+         <drb:nameMatch>(?i)(.*metno-MODEL-topaz4-ARC-b.*|metoffice_.*|OA_NRTOAGL01.*|.*OSISAF-L3S.*|.*IFR-L3C.*|.*-UKMO-L4.*|GLO-WIND_L3-OBS_METOP.*|.*-fv\d\d(\.\d){0,1})\.nc</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
