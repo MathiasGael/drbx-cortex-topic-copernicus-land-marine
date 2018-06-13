@@ -44,6 +44,39 @@
        ([0-9]{6}-UKMO-L4_GHRSST-SSTfnd-OSTIAmonthly-GLOB-v02.0-fv02.0\.nc) |
        ([0-9]{8}-UKMO-L4LRens-GLOB-v01-fv02-GMPE.nc) |
        (GLO-WIND_L3-OBS_METOP-(A|B)_ASCAT_(12|25)_(DES|ASC)_[0-9]{8}\.nc)
+
+          >> soit
+
+          [0-9]{8}.*metno-MODEL.*
+          metoffice_(coupled|foam1|wave).*
+          OA_NRTOAGL01_.*
+          [0-9]{8}.*-OSISAF-L3S.*
+          [0-9]{8}.*-IFR-L3C.*
+          [0-9]{4}.*-UKMO-L4.*
+          GLO-WIND_L3.*
+
+       Empiriquement deduit des container CMarine_201802, CMarine_201804 et CMarine_201805 :
+
+       [0-9]{8}.*-GOS-(L3S|L4).*
+          [0-9]{8}.*-IFR-L4.* (a inclure dans la regex au-dessus)
+       [0-9]{8}.*-DMI-L4.*
+       [0-9]{8}.*-JAXA-L3C.*
+       [0-9]{8}.*-JPL-L3C.*
+       [0-9]{8}.*-MAR-L3C.*
+          [0-9]{8}.*-OSISAF-L3C.* (a inclure dans la regex au-dessus)
+       [0-9]{8}.*-ACRI-(L3|L4).*
+       [0-9]{8}.*-CMCC-.*
+       [0-9]{8}.*-INGV-.*
+       [0-9]{8}.*_CNR-L3.*
+       [0-9]{8}.*_PML-L3.*
+       BAL-HBM_PHY.*[0-9]{8}.*
+       CMEMS_v(3|4).*
+       dataset-armor-3d-nrt-.*
+       ice_(conc|drift|edge|thic|thick|thickness|type)_.*[0-9]{8}.*
+       iceberg_conc_.*[0-9]{8}.*
+       mercatorpsy.*[0-9]{8}.*
+       nrt_(arctic|blacksea|europe|global|med)_.*_phy.*[0-9]{8}.*
+
     -->
 
    <!-- ==================================================================== -->
@@ -56,10 +89,7 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&nc;netCDF"/>
       <drb:signature rdf:parseType="Resource">
-         <!--
-         <drb:nameMatch>(.*-fv\d\d(\.\d){0,1}|metoffice_.*|CMEMS_v.*|OA_NRTOAGL\d\d_\d{8}_fld_\D{4})\.nc</drb:nameMatch>
-         -->
-         <drb:nameMatch>(?i)(.*metno-MODEL-topaz4-ARC-b.*|metoffice_.*|OA_NRTOAGL01.*|.*OSISAF-L3S.*|.*IFR-L3C.*|.*-UKMO-L4.*|GLO-WIND_L3-OBS_METOP.*|.*-fv\d\d(\.\d+){0,1})\.nc</drb:nameMatch>
+         <drb:nameMatch>([0-9]{8}.*metno-MODEL.*|metoffice_(coupled|foam1|wave).*|OA_NRTOAGL01_.*|[0-9]{8}.*-OSISAF-(L3C|L3S).*|[0-9]{8}.*-IFR-(L3C|L4).*|[0-9]{4}.*-UKMO-L4.*|GLO-WIND_L3.*|[0-9]{8}.*-GOS-(L3S|L4).*|[0-9]{8}.*-DMI-L4.*|[0-9]{8}.*-JAXA-L3C.*|[0-9]{8}.*-JPL-L3C.*|[0-9]{8}.*-MAR-L3C.*|[0-9]{8}.*-ACRI-(L3|L4).*|[0-9]{8}.*-CMCC-.*|[0-9]{8}.*-INGV-.*|[0-9]{8}.*_CNR-L3.*|[0-9]{8}.*_PML-L3.*|BAL-HBM_PHY.*[0-9]{8}.*|CMEMS_v(3|4).*|dataset-armor-3d-nrt-.*|ice_(conc|drift|edge|thic|thick|thickness|type)_.*[0-9]{8}.*|iceberg_conc_.*[0-9]{8}.*|mercatorpsy.*[0-9]{8}.*|nrt_(arctic|blacksea|europe|global|med)_.*_phy.*[0-9]{8}.*)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
