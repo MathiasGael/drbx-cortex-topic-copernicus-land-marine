@@ -74,7 +74,7 @@
        dataset-armor-3d-nrt-.*
        ice_(conc|drift|edge|thic|thick|thickness|type)_.*[0-9]{8}.*
        iceberg_conc_.*[0-9]{8}.*
-       mercatorpsy.*[0-9]{8}.*
+       mercatorpsy.*[0-9]{6}.*
        nrt_(arctic|blacksea|europe|global|med)_.*_phy.*[0-9]{8}.*
 
        Empiriquement deduit du tree donne par Andrea :
@@ -93,7 +93,7 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&nc;netCDF"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>([0-9]{8}.*metno-MODEL.*|metoffice_(coupled|foam1|wave).*|OA_NRTOAGL01_.*|[0-9]{8}.*-OSISAF-(L3C|L3S).*|[0-9]{8}.*-IFR-(L3C|L4).*|[0-9]{4}.*-UKMO-L4.*|GLO-WIND_L3.*|[0-9]{8}.*-GOS-(L3S|L4).*|[0-9]{8}.*-DMI-L4.*|[0-9]{8}.*-JAXA-L3C.*|[0-9]{8}.*-JPL-L3C.*|[0-9]{8}.*-MAR-L3C.*|[0-9]{8}.*-ACRI-(L3|L4).*|[0-9]{8}.*-CMCC-.*|[0-9]{8}.*-INGV-.*|[0-9]{8}.*_CNR-L3.*|[0-9]{8}.*_PML-L3.*|BAL-HBM_PHY.*[0-9]{8}.*|CMEMS_v(3|4).*|dataset-armor-3d-nrt-.*|ice_(conc|drift|edge|thic|thick|thickness|type)_.*[0-9]{8}.*|iceberg_conc_.*[0-9]{8}.*|mercatorpsy.*[0-9]{8}.*|nrt_(arctic|blacksea|europe|global|med)_.*_phy.*[0-9]{8}.*|GLO-MFC.*|[0-9]{8}-MF_CMS-L3C.*)</drb:nameMatch>
+         <drb:nameMatch>([0-9]{8}.*metno-MODEL.*|metoffice_(coupled|foam1|wave).*|OA_NRTOAGL01_.*|[0-9]{8}.*-OSISAF-(L3C|L3S).*|[0-9]{8}.*-IFR-(L3C|L4).*|[0-9]{4}.*-UKMO-L4.*|GLO-WIND_L3.*|[0-9]{8}.*-GOS-(L3S|L4).*|[0-9]{8}.*-DMI-L4.*|[0-9]{8}.*-JAXA-L3C.*|[0-9]{8}.*-JPL-L3C.*|[0-9]{8}.*-MAR-L3C.*|[0-9]{8}.*-ACRI-(L3|L4).*|[0-9]{8}.*-CMCC-.*|[0-9]{8}.*-INGV-.*|[0-9]{8}.*_CNR-L3.*|[0-9]{8}.*_PML-L3.*|BAL-HBM_PHY.*[0-9]{8}.*|CMEMS_v(3|4).*|dataset-armor-3d-nrt-.*|ice_(conc|drift|edge|thic|thick|thickness|type)_.*[0-9]{8}.*|iceberg_conc_.*[0-9]{8}.*|mercatorpsy.*[0-9]{6}.*|nrt_(arctic|blacksea|europe|global|med)_.*_phy.*[0-9]{8}.*|GLO-MFC.*|[0-9]{8}-MF_CMS-L3C.*)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -251,9 +251,9 @@
       <rdfs:subClassOf rdf:resource="&cop;productLand"/>
       but it does not work... -->
       <!--
-      <rdfs:subClassOf rdf:resource="&drb;item"/>
-      -->
       <rdfs:subClassOf rdf:resource="&drb;zip"/>
+      -->
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
          <drb:xqueryTest>
             *[matches(name(), "g2_BIOPAR_(FAPAR|FCOVER|LAI|NDVI|VCI|VPI|DMP|BA).*")]
